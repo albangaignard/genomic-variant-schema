@@ -1,6 +1,9 @@
 site_name: genomic-variants-schema
 site_url: https://swat4hcls-2025-genomic-variation/genomic-variants-schema
 repo_url: https://github.com/swat4hcls-2025-genomic-variation/genomic-variant-schema
+docs_dir: docs
+site_dir: site
+site_description: A schema for genomic variants
 
 theme:
   name: material
