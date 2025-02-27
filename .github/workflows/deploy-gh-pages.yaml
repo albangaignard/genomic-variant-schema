@@ -28,6 +28,6 @@ jobs:
       - run: mkdir docs
       - run: pip install -r requirements.txt
       - run: mkdocs -v build
-      - run: mkdocs -v gh-deploy --config-file mkdocs.yml --force
+      - run: mkdocs -v gh-deploy --config-file mkdocs.yml
       - run: ls site
       - run: ls docs
