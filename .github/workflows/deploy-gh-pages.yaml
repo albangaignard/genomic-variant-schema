@@ -25,10 +25,7 @@ jobs:
           path: .cache 
           restore-keys: |
             mkdocs-material-
-      - run: ls docs
       - run: pip install -r requirements.txt
-      - run: mkdocs build --config-file mkdocs.yml
-      - run: ls docs
+      - run: gen-doc gvar-schema.yaml -d docs
+      #- run: mkdocs build --config-file mkdocs.yml
       - run: mkdocs -v gh-deploy --config-file mkdocs.yml --force
-      - run: ls site
-      - run: ls docs
