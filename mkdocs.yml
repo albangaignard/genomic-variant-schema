@@ -1,6 +1,6 @@
 site_name: genomic-variants-schema
-site_url: https://ican.univ-nantes.io/genomic-variants-schema
-repo_url: https://gitlab.univ-nantes.fr/bodrug-a/genomic-variants-schema
+site_url: https://swat4hcls-2025-genomic-variation/genomic-variants-schema
+repo_url: https://github.com/swat4hcls-2025-genomic-variation/genomic-variant-schema
 
 theme:
   name: material
