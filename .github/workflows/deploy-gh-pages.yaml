@@ -18,16 +18,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-    #  - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
-    #  - uses: actions/cache@v4
-    #    with:
-    #      key: mkdocs-material-${{ env.cache_id }}
-    #      path: .cache 
-    #      restore-keys: |
-    #        mkdocs-material-
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
+        with:
+            key: mkdocs-material-${{ env.cache_id }}
+            path: .cache 
+            restore-keys: |
+            mkdocs-material-
       - run: ls docs
       - run: pip install -r requirements.txt
-#      - run: mkdocs -v build
+      - run: mkdocs -v build --clean 
       - run: mkdocs -v gh-deploy --config-file mkdocs.yml --force
       - run: ls site
       - run: ls docs
