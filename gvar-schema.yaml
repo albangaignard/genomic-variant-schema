@@ -1,0 +1,196 @@
+id: https://ican.fr/
+name: gvar
+description: |-
+  Schema for describing genomic variants as organised in a VCF file.
+  This is not a representation of a VCF in RDF.
+  This is a representation of genomic variants as Linked Data.  
+
+license: https://creativecommons.org/publicdomain/zero/1.0/
+
+imports:
+  - linkml:types
+
+prefixes:
+  ican: https://ican.fr/
+  linkml: https://w3id.org/linkml/
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  skos: http://www.w3.org/2004/02/skos/core#
+  so: http://purl.obolibrary.org/obo/SO_
+  faldo: http://biohackathon.org/resource/faldo#
+  geno: http://purl.obolibrary.org/obo/GENO_
+  sio: http://semanticscience.org/resource/SIO_
+  owl: http://www.w3.org/2002/07/owl#
+  aic: https://example.org/aiccohortvariants#
+  mondo: http://purl.obolibrary.org/obo/MONDO_
+  hpo: http://purl.obolibrary.org/obo/HP_
+  ncit: http://purl.obolibrary.org/obo/NCIT_
+
+default_range: string
+default_prefix: ican
+
+
+###########
+# Classes #
+###########
+classes:
+  # Sequence Alteration / Variation
+  SequenceAlteration:
+    description: "A representation of a sequence alteration (so:0001059)."
+    class_uri: so:0001059
+    exact_mappings:
+      - geno:0000660
+    attributes:
+      has_identifier:
+        description: "A unique identifier for the sequence alteration."
+        required: true
+        range: VariantIdentifier
+        slot_uri: sio:000674
+      has_reference_allele:
+        description: "Links the sequence alteration to its reference allele."
+        required: false
+        range: ReferenceAllele  # Updated to reference the new class
+        slot_uri: geno:0000385
+      has_alternate_allele:
+        description: "Links the sequence alteration to its alternate allele."
+        required: false
+        range: AlternateAllele  # Updated to reference the new class
+        slot_uri: geno:0000382
+      has_location:
+        description: "Links the sequence alteration to its location."
+        required: false
+        range: VariationSite
+        slot_uri: faldo:location
+      has_zygosity:
+        description: "The zygosity of the sequence alteration."
+        required: false
+        range: ZygosityType
+        slot_uri: geno:0000139
+  # VariantIdentifier
+  VariantIdentifier:
+    class_uri: sio:000675
+    description: "A unique identifier for a sequence alteration."
+    attributes:
+      hgvsid:
+        description: "HGVSid."
+        required: true
+        range: string
+        slot_uri: sio:000300
+      rsid:
+        description: "dbsnp rsid."
+        required: false
+        range: string
+        slot_uri: sio:000300
+      other:
+        description: "Other identifiers."
+        required: false
+        range: string
+        slot_uri: sio:000300
+  # Alleles
+  ReferenceAllele:
+    class_uri: geno:0000036  # Define a class for the reference allele
+    description: "Represents the reference allele (geno:0000036)."
+    attributes:
+      value:
+        description: "The value of the reference allele."
+        required: true
+        range: string
+        slot_uri: sio:000300
+  AlternateAllele:
+    class_uri: geno:0000002  # Define a class for the alternate allele
+    description: "Represents the alternate allele (geno:0000002)."
+    attributes:
+      value:
+        description: "The value of the alternate allele."
+        required: true
+        range: string
+        slot_uri: sio:000300
+  # Location/Position of the sequence alteration  
+  VariationSite:
+    class_uri: faldo:Region
+    description: "Represents the location of a sequence alteration."
+    attributes:
+      begins_at:
+        description: "The beginning of the location of the sequence alteration."
+        required: true
+        range: VariationSiteBegin
+        slot_uri: faldo:begin
+      ends_at:
+        description: "The end of the location of the sequence alteration."
+        required: true
+        range: VariationSiteEnd
+        slot_uri: faldo:end
+      has_reference:
+        description: "The reference sequence (contig, sequence, chromosome)."
+        required: true
+        range: VariationSiteReference
+        slot_uri: faldo:reference
+  # Coordinates
+  VariationSiteBegin:
+    class_uri: faldo:ExactPosition
+    description: "Represents the beginning of the location of a sequence alteration."
+    attributes:
+      position:
+        description: "The position of the beginning of the location of the sequence alteration."
+        required: true
+        range: integer
+        slot_uri: faldo:position
+  VariationSiteEnd:
+    class_uri: faldo:ExactPosition
+    description: "Represents the end of the location of a sequence alteration."
+    attributes:
+      position:
+        description: "The position of the end of the location of the sequence alteration."
+        required: true
+        range: integer
+        slot_uri: faldo:position
+  # Reference Sequence
+  VariationSiteReference:
+    class_uri: so:0000353
+    description: "Represents the reference sequence (contig, sequence, chromosome)."
+    attributes:
+      value:
+        description: "The value of the reference sequence 
+        (ena sequence i.e. https://www.ebi.ac.uk/ena/browser/view/CM000684.2)."
+        required: true
+        range: string
+      label:
+        description: "A human-readable label for the reference sequence."
+        required: true
+        range: string
+        slot_uri: rdfs:label
+      sameAs:
+        description: "The value of the reference sequence in another database 
+        (ncbi sequence i.e. https://www.ncbi.nlm.nih.gov/nuccore/NC_000022.11)."
+        required: true
+        range: string
+        slot_uri: owl:sameAs
+  # Container
+  Container:
+    attributes:
+      variantcatalog:
+        multivalued: true
+        inlined_as_list: true
+        range: SequenceAlteration
+###########
+# Enums   #
+###########
+enums:
+  # Zygosity Type
+  ZygosityType:
+    description: "Enumeration of zygosity types."
+    permissible_values:
+      Homozygous:
+        description: "Homozygous site."
+        meaning: geno:0000136
+      Heterozygous:
+        description: "Heterozygous site."
+        meaning: geno:0000135
+      Unspecified:
+        description: "Unspecified zygosity site"
+        meaning: geno:0000137
+      Disomic:
+        description: "Disomic site."
+        meaning: geno:0000391
+
+      

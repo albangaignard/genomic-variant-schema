@@ -1,0 +1,48 @@
+variantcatalog:
+  - has_identifier: 
+      hgvsid: "HGVSid:22:g.16050075A>G"
+      rsid: "rs769022609"
+    has_reference_allele: 
+      value: "A" 
+    has_alternate_allele: 
+      value: "T"  
+    has_location: 
+      begins_at: 
+        position: 16050075
+      ends_at: 
+        position: 16050076
+      has_reference:
+        value: "CM000684.2"
+        label: "GRCh38 Chromosome 22"
+        sameAs: "NC_000022.11"
+    has_observation:
+      - has_zygosity: Disomic
+        has_population: 
+          label: Headache
+          has_trait: 
+            - from_ontology: HPO
+              label: Aneurysms
+              code: hpo:00123
+            - from_ontology: MONDO
+              label: Diabetes
+              code: mondo:00456
+        has_count: 
+          value: 20
+        has_frequency: 
+          value: 0.20
+  - has_identifier: 
+      hgvsid: "HGVSid:22:g.16050076T>C"
+      rsid: "rs769022610"
+    has_reference_allele: 
+      value: "T" 
+    has_alternate_allele: 
+      value: "C"  
+    has_location: 
+      begins_at: 
+        position: 16050076
+      ends_at: 
+        position: 16050077
+      has_reference:
+        value: "CM000684.2"
+        label: "GRCh38 Chromosome 22"
+        sameAs: "NC_000022.11"

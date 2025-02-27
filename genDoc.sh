@@ -1,0 +1,1 @@
+gen-doc gvar-schema.yaml -d docs

@@ -1,0 +1,28 @@
+site_name: genomic-variants-schema
+site_url: https://ican.univ-nantes.io/genomic-variants-schema
+repo_url: https://gitlab.univ-nantes.fr/bodrug-a/genomic-variants-schema
+
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: orange
+  features:
+    - navigation.sections
+    - navigation.footer
+
+nav:
+  - Home: index.md
+  - About: about.md
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - pymdownx.superfences:
+        # make exceptions to highlighting of code:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
