@@ -27,7 +27,8 @@ jobs:
             mkdocs-material-
       - run: ls docs
       - run: pip install -r requirements.txt
-      - run: mkdocs -v build --clean 
+      - run: mkdocs build --config-file mkdocs.yml
+      - run: ls docs
       - run: mkdocs -v gh-deploy --config-file mkdocs.yml --force
       - run: ls site
       - run: ls docs
