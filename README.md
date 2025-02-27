@@ -1,8 +1,8 @@
 # Genomic variants schema
 Representing genomic variants as Linked Data using expert domain ontologies
 
-# LinkML Schema
-https://ican.univ-nantes.io/genomic-variants-schema
+# Schema documentation
+https://swat4hcls-2025-genomic-variation.github.io/genomic-variants-schema
 
 # Hand-drawn schema
 As of 21-02-2025
